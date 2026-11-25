@@ -4,9 +4,8 @@ public class Partie {
     private Main joueur;
     private Main croupier;
 
-    private enum resultat {
+    public enum resultat {
         EN_COURS, WIN, LOSE, EVEN
-        
     }
     private resultat res = resultat.EN_COURS;
 
