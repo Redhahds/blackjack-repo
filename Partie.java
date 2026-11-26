@@ -4,10 +4,10 @@ public class Partie {
     private Main joueur;
     private Main croupier;
 
-    public enum resultat {
-        EN_COURS, WIN, LOSE, EVEN
+    public enum Resultat {
+        EN_COURS, WIN, LOSE, EVEN, C_BLACKJACK, J_BLACKJACK, E_BLACKJACK
     }
-    private resultat res = resultat.EN_COURS;
+    private Resultat res = Resultat.EN_COURS;
 
     public Partie(Paquet paquet, Main joueur, Main croupier){
         this.paquet = paquet;
@@ -15,12 +15,12 @@ public class Partie {
         this.croupier = croupier;
     }
 
-    public resultat getRes(){ 
+    public Resultat getRes(){ 
         return res;
     }
 
     public void demarrerManche(){
-        res = resultat.EN_COURS;
+        res = Resultat.EN_COURS;
         joueur.vider();
         croupier.vider();
         paquet.melanger();
@@ -29,43 +29,43 @@ public class Partie {
             joueur.ajouterCarte(paquet.piocher());
         }
         if(croupier.estBlackjack() && joueur.estBlackjack()){
-            res = resultat.EVEN;
+            res = Resultat.E_BLACKJACK;
         }
         else if(croupier.estBlackjack()){
-            res = resultat.LOSE;
+            res = Resultat.C_BLACKJACK;
         }
         else if(joueur.estBlackjack()){
-            res = resultat.WIN;
+            res = Resultat.J_BLACKJACK;
         }
     }
 
     public void hitJoueur(){
         joueur.ajouterCarte(paquet.piocher());
         if(joueur.estBust()){
-            res = resultat.LOSE;
+            res = Resultat.LOSE;
         }
         else{
-            res = resultat.EN_COURS;
+            res = Resultat.EN_COURS;
         }
     }
 
     public void standJoueur(){
-        if (res != resultat.EN_COURS) return;
+        if (res != Resultat.EN_COURS) return;
         while (croupier.calculerScore() < 17) {
             croupier.ajouterCarte(paquet.piocher());
         }
         if(croupier.estBust()){
-            res = resultat.WIN;
+            res = Resultat.WIN;
         }
         else{
             if(joueur.calculerScore() < croupier.calculerScore()){
-                res = resultat.LOSE;
+                res = Resultat.LOSE;
             }
             else if(joueur.calculerScore() > croupier.calculerScore()){
-                res = resultat.WIN;
+                res = Resultat.WIN;
             }
             else{
-                res = resultat.EVEN;
+                res = Resultat.EVEN;
             }
         }
     }
