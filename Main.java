@@ -25,6 +25,13 @@ public class Main {
         return Collections.unmodifiableList(cartesMain);
     }
 
+    public Carte getCartesCroupier(){
+        if (cartesMain.isEmpty()) {
+        return null;
+        }
+        return cartesMain.get(0);
+    }
+
     public boolean estBlackjack(){
         return cartesMain.size() == 2 && calculerScore() == 21;
     }

@@ -1,7 +1,7 @@
 public class Carte {
     
     public enum Couleur {
-        PIQUE("♠"), COEUR("♥"), CARREAU("♦"), TREFLE("♣");
+        PIQUE("Pique"), COEUR("Coeur"), CARREAU("Carreau"), TREFLE("Trèfle");
         private final String symbole;
 
         Couleur(String symbole) {
