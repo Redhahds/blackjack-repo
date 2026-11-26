@@ -20,6 +20,8 @@ public class App {
         
             case EVEN:
                 System.out.println("Égalité chacun reprend sa mise");
+                break;
+                
             default:
                 System.out.println("On continue");;
                 break;

@@ -20,6 +20,7 @@ public class Partie {
     }
 
     public void demarrerManche(){
+        res = resultat.EN_COURS;
         joueur.vider();
         croupier.vider();
         paquet.melanger();
@@ -36,12 +37,36 @@ public class Partie {
         else if(joueur.estBlackjack()){
             res = resultat.WIN;
         }
+    }
+
+    public void hitJoueur(){
+        joueur.ajouterCarte(paquet.piocher());
+        if(joueur.estBust()){
+            res = resultat.LOSE;
+        }
         else{
-            suite();
+            res = resultat.EN_COURS;
         }
     }
 
-    public void suite(){
-
+    public void standJoueur(){
+        if (res != resultat.EN_COURS) return;
+        while (croupier.calculerScore() < 17) {
+            croupier.ajouterCarte(paquet.piocher());
+        }
+        if(croupier.estBust()){
+            res = resultat.WIN;
+        }
+        else{
+            if(joueur.calculerScore() < croupier.calculerScore()){
+                res = resultat.LOSE;
+            }
+            else if(joueur.calculerScore() > croupier.calculerScore()){
+                res = resultat.WIN;
+            }
+            else{
+                res = resultat.EVEN;
+            }
+        }
     }
 }
