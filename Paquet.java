@@ -20,6 +20,10 @@ public class Paquet {
         return cartes.remove(0);
     }
 
+    public boolean presqueVide(){
+        return cartes.size() < 5;
+    }
+
     public void melanger(){
         Collections.shuffle(cartes);
     }

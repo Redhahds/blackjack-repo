@@ -39,6 +39,10 @@ public class Partie {
         }
     }
 
+    public void setPaquet(Paquet paquet) {
+        this.paquet = paquet;
+    }
+
     public void hitJoueur(){
         joueur.ajouterCarte(paquet.piocher());
         if(joueur.estBust()){
